@@ -22,3 +22,4 @@ coverage/
 # Internal docs (not for GitHub)
 docs/
 DOCUMENTATION.md
+.github/

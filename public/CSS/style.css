@@ -1,0 +1,576 @@
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+
+:root {
+    /* Brand palette — deep teal + amber */
+    --brand-color:           #0F766E;   /* primary teal */
+    --brand-color-dark:      #0D6B63;   /* primary teal hover */
+    --brand-accent:          #F97316;   /* CTA amber */
+    --brand-accent-dark:     #EA6C0A;
+    --brand-text:            #111827;   /* near-black body text */
+    --brand-muted:           #6B7280;   /* secondary text */
+    --brand-surface:         #F9FAFB;   /* page background */
+
+    --navbar-height:         4.5rem;
+    --radius-card:           0.75rem;
+    --shadow-card:           0 2px 12px rgba(0,0,0,0.08);
+
+    /* ── Bootstrap 5 colour overrides (picked up automatically) ────────────── */
+    --bs-primary:            #0F766E;
+    --bs-primary-rgb:        15, 118, 110;
+    --bs-primary-text:       #0F766E;
+    --bs-primary-bg-subtle:  #ccece9;
+    --bs-link-color:         #0F766E;
+    --bs-link-hover-color:   #0D6B63;
+    --bs-focus-ring-color:   rgba(15, 118, 110, 0.25);
+}
+
+/* ── Bootstrap btn-primary — explicit overrides ────────────────────────────── */
+
+.btn-primary {
+    background-color: var(--brand-color);
+    border-color:     var(--brand-color);
+    color:            #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    background-color: var(--brand-color-dark);
+    border-color:     var(--brand-color-dark);
+    color:            #fff;
+}
+
+.btn-primary:disabled {
+    background-color: var(--brand-color);
+    border-color:     var(--brand-color);
+    opacity: 0.65;
+}
+
+/* Outline variant */
+
+.btn-outline-primary {
+    color:        var(--brand-color);
+    border-color: var(--brand-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--brand-color);
+    border-color:     var(--brand-color);
+    color:            #fff;
+}
+
+/* Focus ring */
+
+.btn-primary:focus-visible,
+.btn-outline-primary:focus-visible {
+    box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color);
+}
+
+/* ── Pagination ─────────────────────────────────────────────────────────────── */
+
+/* Override every Bootstrap pagination token so nothing stays default blue */
+:root {
+    --bs-pagination-color:              var(--brand-color);
+    --bs-pagination-border-color:       #dee2e6;
+    --bs-pagination-hover-color:        var(--brand-color-dark);
+    --bs-pagination-hover-bg:           #e6f2f1;
+    --bs-pagination-hover-border-color: #dee2e6;
+    --bs-pagination-active-color:       #fff;
+    --bs-pagination-active-bg:          var(--brand-color);
+    --bs-pagination-active-border-color:var(--brand-color);
+    --bs-pagination-disabled-color:     #adb5bd;
+    --bs-pagination-focus-color:        var(--brand-color);
+    --bs-pagination-focus-bg:           #e6f2f1;
+    --bs-pagination-focus-box-shadow:   0 0 0 0.25rem rgba(15, 118, 110, 0.25);
+}
+
+/* Pill-shaped bar — rounded ends, no gap borders */
+.pagination {
+    border-radius: 2rem;
+    overflow:      hidden;
+    border:        1px solid #dee2e6;
+    gap:           0;
+}
+
+/* Remove individual item borders so there's only the outer border */
+.page-link {
+    border:       none;
+    border-right: 1px solid #dee2e6;
+    color:        var(--brand-color);
+    font-weight:  500;
+    padding:      0.45rem 0.9rem;
+    transition:   background-color 0.15s ease, color 0.15s ease;
+}
+
+.page-item:last-child .page-link {
+    border-right: none;
+}
+
+.page-link:hover {
+    color:            var(--brand-color-dark);
+    background-color: #e6f2f1;
+}
+
+.page-item.active .page-link {
+    background-color: var(--brand-color);
+    border-color:     var(--brand-color);
+    color:            #fff;
+    font-weight:      600;
+}
+
+.page-item.disabled .page-link {
+    color:            #adb5bd;
+    background-color: #f8f9fa;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(15, 118, 110, 0.25);
+    outline:    none;
+}
+
+/* ── Brand accent — use on special CTAs ────────────────────────────────────── */
+
+.btn-accent {
+    background-color: var(--brand-accent);
+    border-color:     var(--brand-accent);
+    color:            #fff;
+}
+
+.btn-accent:hover {
+    background-color: var(--brand-accent-dark);
+    border-color:     var(--brand-accent-dark);
+    color:            #fff;
+}
+
+
+/* ── Navbar ─────────────────────────────────────────────────────────────────── */
+
+/* navbar */
+
+.navbar {
+    min-height: 4.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: white;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        min-height: 7rem;
+    }
+}
+
+.text {
+    padding-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* footer */
+
+footer{
+    min-height: 6rem;
+    padding: 1rem 0;
+    background-color: rgb(242, 242, 242);
+
+}
+
+.f-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    font-weight: 430;
+    align-content: space-around;
+
+}
+
+.f-info-socials {
+    width: 100%;
+}
+
+.company {
+    width: 100%;
+    margin-bottom: 0.6rem;
+}
+
+.links a {
+    text-decoration: none;
+    width: 100%;
+    color: #222222;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-socials i {
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.f-info-socials a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.f-info-socials a:hover {
+    color: var(--brand-color);
+}
+
+/* cards */
+
+.card {
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.listing-card {
+    border: none;
+    margin-right: 1rem;
+}
+
+.review {
+    margin-right: 0rem;
+}
+
+.card-img-top {
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+.card-text {
+    font-weight: 500;
+}
+
+.listing-links {
+    text-decoration: none;
+}
+
+/* Listing card title — clamp at 2 lines, sensible font size */
+.card-listing-title {
+    font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #111827;
+}
+
+/* Rating row on card */
+.card-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    white-space: nowrap;
+}
+
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
+
+
+}
+
+.container {
+    flex: 1;
+}
+
+/* Card Effect  */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* Show Listing */
+
+.gallery-main {
+    height: 400px;
+    overflow: hidden;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.gallery-side {
+    height: 195px;
+    overflow: hidden;
+}
+
+.gallery-main img,
+.gallery-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-main:hover img,
+.gallery-side:hover img {
+    transform: scale(1.03);
+}
+
+.right_top {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 0;
+}
+
+.right_bottom img {
+    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 0;
+    overflow: hidden;
+}
+
+/* Search Bar */
+
+.search-bar-wrapper {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+.search-group {
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1.5px solid #ddd;
+    width: 100%;
+}
+
+.search-group .input-group-text,
+.search-group .form-control,
+.search-group .btn {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.search-group .form-control:focus {
+    box-shadow: none;
+}
+
+/* Category Pills */
+
+.category-pills {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-pill {
+    border-radius: 2rem;
+    border: 1.5px solid #ddd;
+    color: #444;
+    background: #fff;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.85rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.category-pill:hover,
+.category-pill.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+/* Listing Detail Rows (show page) */
+
+.listing-details {
+    color: #444;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.97rem;
+    line-height: 1.5;
+}
+
+.detail-icon {
+    color: var(--brand-color);
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    min-width: 1.1rem;
+    text-align: center;
+}
+
+/* Empty State */
+
+.empty-state {
+    padding: 4rem 1rem;
+}
+
+/* Booking Card */
+
+.booking-card {
+    background: #fff;
+}
+
+.booking-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #555;
+    margin-bottom: 0.1rem;
+}
+
+.booking-date-input {
+    font-size: 0.92rem;
+    box-shadow: none !important;
+    outline: none;
+    background: transparent;
+}
+
+.booking-date-input:focus {
+    box-shadow: none;
+    background: transparent;
+}
+
+.booking-date-grid {
+    border-color: #ddd !important;
+}
+
+/* Booking Status Badges */
+
+.booking-status-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.booking-status-pending   { background: #fff3cd; color: #856404; }
+.booking-status-confirmed { background: #d1e7dd; color: #0f5132; }
+.booking-status-cancelled { background: #f8d7da; color: #842029; }
+
+/* Show page — listing title */
+
+.listing-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.2;
+}
+
+/* Back link */
+
+.back-link {
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--brand-color) !important;
+}
+
+/* Description line-clamp */
+
+.desc-clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.desc-text {
+    transition: all 0.2s ease;
+}
+
+/* Image preview in forms */
+
+.img-preview {
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* Result count */
+
+.result-count {
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* Listing title link in bookings page */
+
+.listing-title-link:hover {
+    color: var(--brand-color) !important;
+    transition: color 0.2s ease;
+}
+
+/* Booking widget — softer border */
+
+.booking-date-grid {
+    border-color: #ddd !important;
+}
+
+/* Card image — consistent 4:3 ratio on listing grid */
+
+.listing-card .card-img-top {
+    aspect-ratio: 4 / 3;
+    height: auto !important;
+    object-fit: cover;
+}
+
+/* Sticky booking card — use CSS variable for top offset */
+
+.booking-card.sticky-top {
+    top: calc(var(--navbar-height) + 1rem) !important;
+}
+
+/* ── Skeleton loading ───────────────────────────────────────────────────────── */
+
+@keyframes skeleton-shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+
+.skeleton-card {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.skeleton-img {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-line {
+    height: 0.85rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-line.short { width: 55%; }
+.skeleton-line.xshort { width: 35%; }
+
+#listing-grid { opacity: 0; transition: opacity 0.3s ease; }
+#listing-grid.loaded { opacity: 1; }
+

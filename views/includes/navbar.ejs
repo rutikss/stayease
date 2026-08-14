@@ -1,0 +1,43 @@
+
+<nav class="navbar sticky-top navbar-expand-md bg-body-light border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/Listings">
+        <i class="fa-solid fa-person-walking-luggage" style="color: var(--brand-color); font-size: 1.25rem;"></i>
+        <b class="fw-semibold">StayEase</b>
+    </a>
+
+    <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-md-center">
+            <li class="nav-item">
+                <a class="nav-link px-3" href="/Listings/new">Become a Host</a>
+            </li>
+            <% if(!currUser){ %>
+                <li class="nav-item">
+                    <a href="/signUp" class="nav-link px-3">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logIn" class="btn btn-primary btn-sm px-4 ms-1">Log In</a>
+                </li>
+            <% } else { %>
+                <li class="nav-item">
+                    <a href="/bookings" class="nav-link px-3">
+                        <i class="fa-regular fa-calendar-check me-1"></i>My Bookings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logOut" class="btn btn-outline-secondary btn-sm px-4 ms-1">Log out</a>
+                </li>
+            <%}%>
+        </ul>
+    </div>
+  </div>
+</nav>

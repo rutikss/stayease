@@ -1,0 +1,69 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<div class="row justify-content-center mt-5 pt-3 mb-5">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 rounded-4 m-2 bg-white">
+            <div class="card-body p-4">
+                <h1 class="fs-4 text-center mb-4 fw-semibold">Add New Listing</h1>
+                <form action="/Listings" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="row g-3">
+
+                        <!-- Title -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="newTitle">Title</label>
+                            <input type="text" placeholder="Enter title" name="listing[title]" id="newTitle" class="form-control" autocomplete="off" required>
+                            <div class="invalid-feedback">Please enter a title.</div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="newPrice">Price / night</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" placeholder="0" name="listing[price]" id="newPrice" class="form-control" min="0" required>
+                            </div>
+                            <div class="invalid-feedback">Enter a valid price.</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold text-muted mb-1" for="newDesc">Description</label>
+                            <textarea placeholder="Describe your property…" name="listing[description]" id="newDesc" class="form-control" rows="4" required></textarea>
+                            <div class="invalid-feedback">Please enter a description.</div>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold text-muted mb-1" for="newImg">Photo</label>
+                            <input type="file" accept="image/*" name="image" id="newImg" class="form-control" onchange="previewImage(this, 'newImgPreview')">
+                            <div class="mt-2">
+                                <img id="newImgPreview" src="" alt="" class="img-preview d-none rounded-3">
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="newLocation">Location</label>
+                            <input type="text" placeholder="City / area" name="listing[location]" id="newLocation" class="form-control" required>
+                            <div class="invalid-feedback">Please enter a location.</div>
+                        </div>
+
+                        <!-- Country -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="newCountry">Country</label>
+                            <input type="text" placeholder="Country" name="listing[country]" id="newCountry" class="form-control" required>
+                            <div class="invalid-feedback">Please enter a country.</div>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-primary w-100 py-2 fw-semibold">Add Listing</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

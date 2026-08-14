@@ -1,0 +1,28 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<div class="row justify-content-center mt-5 pt-5 mb-5">
+    <div class="col-md-6 text-center">
+        <div class="error-page-icon mb-4">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 4rem; color: #e74c3c;"></i>
+        </div>
+
+        <% if (typeof statusCode !== 'undefined') { %>
+            <h1 class="display-4 fw-bold text-danger mb-2"><%= statusCode %></h1>
+        <% } %>
+
+        <h2 class="fw-semibold mb-3"><%= message || "Something went wrong" %></h2>
+
+        <p class="text-muted mb-4">
+            Don't worry — the issue has been logged. Let's get you back on track.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/Listings" class="btn btn-primary px-4 py-2">
+                <i class="fa-solid fa-house me-2"></i>Back to Listings
+            </a>
+            <a href="javascript:history.back()" class="btn btn-outline-secondary px-4 py-2">
+                <i class="fa-solid fa-arrow-left me-2"></i>Go Back
+            </a>
+        </div>
+    </div>
+</div>

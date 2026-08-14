@@ -1,0 +1,77 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<div class="row justify-content-center mt-5 pt-3 mb-5">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 rounded-4 m-2 bg-white">
+            <div class="card-body p-4">
+                <h1 class="fs-4 text-center mb-4 fw-semibold">Edit Listing</h1>
+                <form action="/Listings/<%= listing.id %>?_method=PATCH" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="row g-3">
+
+                        <!-- Title -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="editTitle">Title</label>
+                            <input type="text" name="listing[title]" id="editTitle" class="form-control" value="<%= listing.title %>" required>
+                            <div class="invalid-feedback">Please enter a title.</div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="editPrice">Price / night</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" name="listing[price]" id="editPrice" class="form-control" value="<%= listing.price %>" min="0" required>
+                            </div>
+                            <div class="invalid-feedback">Enter a valid price.</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold text-muted mb-1" for="editDesc">Description</label>
+                            <textarea name="listing[description]" id="editDesc" class="form-control" rows="4" required><%= listing.description %></textarea>
+                            <div class="invalid-feedback">Please enter a description.</div>
+                        </div>
+
+                        <!-- Current Image Preview -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold text-muted mb-1">Current Photo</label>
+                            <div>
+                                <img src="<%= listing.image.url %>" alt="Current listing image" class="img-preview rounded-3">
+                            </div>
+                        </div>
+
+                        <!-- New Image Upload -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold text-muted mb-1" for="editImg">Replace Photo <span class="text-muted fw-normal">(optional)</span></label>
+                            <input type="file" accept="image/*" name="editedImage" id="editImg" class="form-control" onchange="previewImage(this, 'editImgPreview')">
+                            <div class="mt-2">
+                                <img id="editImgPreview" src="" alt="" class="img-preview d-none rounded-3">
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="editLocation">Location</label>
+                            <input type="text" name="listing[location]" id="editLocation" class="form-control" value="<%= listing.location %>" required>
+                            <div class="invalid-feedback">Please enter a location.</div>
+                        </div>
+
+                        <!-- Country -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-muted mb-1" for="editCountry">Country</label>
+                            <input type="text" name="listing[country]" id="editCountry" class="form-control" value="<%= listing.country %>" required>
+                            <div class="invalid-feedback">Please enter a country.</div>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-primary w-100 py-2 fw-semibold">Save Changes</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

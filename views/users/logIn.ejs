@@ -1,0 +1,60 @@
+<%- layout("layouts/boilerplate.ejs") %>
+
+<div class="mt-5 pt-3 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="card shadow-sm border-0 rounded-4 m-2 bg-white p-4">
+                <div class="card-body">
+                    <h4 class="mb-1 fw-semibold">Welcome back</h4>
+                    <p class="text-muted mb-4">Sign in to continue your journey</p>
+
+                    <form action="/logIn" method="post" class="needs-validation" novalidate>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold text-muted" for="loginUsername">Username</label>
+                            <input
+                                type="text"
+                                placeholder="Enter username"
+                                name="username"
+                                id="loginUsername"
+                                class="form-control"
+                                autocomplete="username"
+                                required
+                            >
+                            <div class="invalid-feedback">Please enter your username.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold text-muted" for="loginPassword">Password</label>
+                            <div class="input-group">
+                                <input
+                                    type="password"
+                                    placeholder="Enter password"
+                                    name="password"
+                                    id="loginPassword"
+                                    class="form-control border-end-0"
+                                    autocomplete="current-password"
+                                    required
+                                >
+                                <button class="btn btn-outline-secondary border-start-0" type="button"
+                                    onclick="togglePassword('loginPassword', this)"
+                                    aria-label="Show password">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="invalid-feedback">Please enter your password.</div>
+                        </div>
+
+                        <button class="btn btn-primary w-100 mt-2 py-2 fw-semibold" type="submit">Sign In</button>
+                    </form>
+
+                    <hr class="my-4">
+                    <p class="text-center text-muted mb-0">
+                        Don't have an account?
+                        <a href="/signUp" class="fw-semibold text-primary text-decoration-none">Create one</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

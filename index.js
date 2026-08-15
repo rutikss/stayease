@@ -32,6 +32,27 @@ async function seedIfEmpty() {
     console.log(`Seeded ${docs.length} listings.`);
 }
 
+async function patchBrokenImages() {
+    const Listing = require("./models/listing.js");
+
+    const broken = [
+        {
+            title: "Art Deco Apartment in Miami",
+            url: "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+        }
+    ];
+
+    for (const patch of broken) {
+        const result = await Listing.findOneAndUpdate(
+            { title: patch.title, "image.url": { $regex: "plus.unsplash.com" } },
+            { $set: { "image.url": patch.url } }
+        );
+        if (result) {
+            console.log(`Patched image for: ${patch.title}`);
+        }
+    }
+}
+
 async function main() {
     await mongoose.connect(process.env.MONGO_URI);
 }
@@ -49,6 +70,7 @@ main()
         console.log("DB connection successful");
 
         await seedIfEmpty();
+        await patchBrokenImages();
 
         const server = app.listen(port, () => {
             console.log(`Server listening on port ${port}`);

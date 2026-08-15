@@ -25,6 +25,10 @@ const userRouter    = require("./routes/user.js");
 const bookingRouter = require("./routes/booking.js");
 
 
+if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+}
+
 app.use(
     helmet({
         contentSecurityPolicy: {
@@ -82,9 +86,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-// CSRF: GETs always run lusca to seed the token in res.locals._csrf.
-// POSTs to /logIn and /signUp are exempt (rate-limited + Passport).
-// POSTs to /Listings skip global check — multer runs first, then listing.js validates manually.
 if (process.env.NODE_ENV !== "test") {
     const csrfMiddleware = lusca.csrf();
 
@@ -92,15 +93,12 @@ if (process.env.NODE_ENV !== "test") {
         const safe   = ["GET", "HEAD", "OPTIONS"];
         const method = req.method.toUpperCase();
 
-        // Safe verbs: always run lusca (sets the token in res.locals._csrf)
         if (safe.includes(method)) return csrfMiddleware(req, res, next);
 
-        // Mutating verbs: skip for auth routes and file-upload listing routes
         const skipPaths = ["/logIn", "/signUp"];
         if (skipPaths.includes(req.path)) return next();
         if (req.path.startsWith("/Listings")) return next();
 
-        // All other mutating routes: full CSRF check
         return csrfMiddleware(req, res, next);
     });
 }

@@ -3,9 +3,34 @@ if (process.env.NODE_ENV != "production") {
 }
 
 const mongoose = require("mongoose");
-const app = require("./app.js");
+const app      = require("./app.js");
 
 const port = process.env.PORT || 8080;
+
+async function seedIfEmpty() {
+    const Listing  = require("./models/listing.js");
+    const User     = require("./models/user.js");
+    const initData = require("./init/data.js");
+
+    const count = await Listing.countDocuments();
+    if (count > 0) {
+        console.log(`DB already has ${count} listings — skipping seed.`);
+        return;
+    }
+
+    console.log("Empty DB detected — seeding listings...");
+
+    let owner = await User.findOne({});
+    if (!owner) {
+        owner = new User({ username: "admin", email: "admin@stayease.com" });
+        await User.register(owner, "Admin@1234");
+        console.log("Seed owner created — username: admin, password: Admin@1234");
+    }
+
+    const docs = initData.data.map(obj => ({ ...obj, owner: owner._id }));
+    await Listing.insertMany(docs);
+    console.log(`Seeded ${docs.length} listings.`);
+}
 
 async function main() {
     await mongoose.connect(process.env.MONGO_URI);
@@ -20,8 +45,10 @@ mongoose.connection.on("disconnected", () => {
 });
 
 main()
-    .then(() => {
+    .then(async () => {
         console.log("DB connection successful");
+
+        await seedIfEmpty();
 
         const server = app.listen(port, () => {
             console.log(`Server listening on port ${port}`);

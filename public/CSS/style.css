@@ -87,24 +87,21 @@
 
 /* Pill-shaped bar — rounded ends, no gap borders */
 .pagination {
-    border-radius: 2rem;
-    overflow:      hidden;
-    border:        1px solid #dee2e6;
-    gap:           0;
+    gap: 0.25rem;
 }
 
 /* Remove individual item borders so there's only the outer border */
 .page-link {
-    border:       none;
-    border-right: 1px solid #dee2e6;
-    color:        var(--brand-color);
-    font-weight:  500;
-    padding:      0.45rem 0.9rem;
-    transition:   background-color 0.15s ease, color 0.15s ease;
+    border:        1px solid #dee2e6;
+    border-radius: 2rem;
+    color:         var(--brand-color);
+    font-weight:   500;
+    padding:       0.45rem 0.9rem;
+    transition:    background-color 0.15s ease, color 0.15s ease;
 }
 
 .page-item:last-child .page-link {
-    border-right: none;
+    border-right: 1px solid #dee2e6;
 }
 
 .page-link:hover {

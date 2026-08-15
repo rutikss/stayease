@@ -16,9 +16,10 @@
       "**/tests/**/*.test.js"
     ]
   },
-  "keywords": [],
+  "keywords": ["nodejs", "expressjs", "mongodb", "ejs", "cloudinary", "passport", "booking-platform", "airbnb-clone"],
   "author": "Rutik Shelke",
-  "license": "ISC",
+  "license": "MIT",
+  "private": true,
   "type": "commonjs",
   "dependencies": {
     "cloudinary": "^2.9.0",

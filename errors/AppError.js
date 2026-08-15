@@ -1,4 +1,4 @@
-const definitions = require("./errorDefinations");
+const definitions = require("./errorDefinitions");
 
 class AppError extends Error {
     constructor(code, customMessage = null) {

@@ -2,6 +2,10 @@
 
 > A full-stack Airbnb-style property listing and booking platform built with Node.js, Express, MongoDB, and EJS.
 
+🔗 **[Live Demo → stayease-lxtz.onrender.com](https://stayease-lxtz.onrender.com/Listings)**
+
+![StayEase — Explore Stays](preview.jpg)
+
 ---
 
 ## Features

@@ -1,31 +1,33 @@
 
-<nav class="navbar sticky-top navbar-expand-md bg-body-light border-bottom">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="/Listings">
+<nav class="navbar sticky-top navbar-expand-md bg-white border-bottom shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="/Listings">
         <i class="fa-solid fa-person-walking-luggage" style="color: var(--brand-color); font-size: 1.25rem;"></i>
-        <b class="fw-semibold">StayEase</b>
+        StayEase
     </a>
 
-    <button class="navbar-toggler" type="button"
+    <button class="navbar-toggler border-0 shadow-none" type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
+        data-bs-target="#navbarMain"
+        aria-controls="navbarMain"
         aria-expanded="false"
         aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-md-center">
+    <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-md-center gap-1">
             <li class="nav-item">
-                <a class="nav-link px-3" href="/Listings/new">Become a Host</a>
+                <a class="nav-link px-3" href="/Listings/new">
+                    <i class="fa-solid fa-plus-circle me-1 d-md-none"></i>Become a Host
+                </a>
             </li>
             <% if(!currUser){ %>
                 <li class="nav-item">
                     <a href="/signUp" class="nav-link px-3">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/logIn" class="btn btn-primary btn-sm px-4 ms-1">Log In</a>
+                    <a href="/logIn" class="btn btn-primary btn-sm px-4 ms-md-1 w-100 w-md-auto">Log In</a>
                 </li>
             <% } else { %>
                 <li class="nav-item">
@@ -34,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/logOut" class="btn btn-outline-secondary btn-sm px-4 ms-1">Log out</a>
+                    <a href="/logOut" class="btn btn-outline-secondary btn-sm px-4 ms-md-1 w-100 w-md-auto">Log out</a>
                 </li>
             <%}%>
         </ul>

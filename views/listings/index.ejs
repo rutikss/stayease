@@ -1,141 +1,147 @@
 <% layout("layouts/boilerplate.ejs") %>
 
+<%- pageTitle = "Explore Stays" %>
 
-<!-- Search Bar -->
-<div class="search-bar-wrapper my-4">
-    <form action="/Listings" method="get" class="d-flex justify-content-center">
-        <div class="input-group search-group shadow-sm">
-            <span class="input-group-text bg-white border-end-0 text-muted">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </span>
-            <input
-                type="text"
-                name="query"
-                value="<%= query %>"
-                class="form-control border-start-0 ps-0"
-                placeholder="Search by city, country or title…"
-                aria-label="Search listings"
-            >
-            <button class="btn btn-primary px-4" type="submit">Search</button>
+<div class="py-3 py-md-4">
+
+    <%- /* Search Bar */ %>
+    <div class="row justify-content-center mb-3 px-2">
+        <div class="col-12 col-md-8 col-lg-6">
+            <form action="/Listings" method="get">
+                <div class="input-group search-group shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input
+                        type="text"
+                        name="query"
+                        value="<%= query %>"
+                        class="form-control border-start-0 ps-0"
+                        placeholder="Search by city, country or title…"
+                        aria-label="Search listings"
+                    >
+                    <button class="btn btn-primary px-3 px-md-4" type="submit">Search</button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-
-<!-- Category Filter Pills -->
-<div class="category-pills gap-2 flex-wrap mb-4">
-    <a href="/Listings" class="btn btn-sm category-pill <%= (!query) ? 'active' : '' %>">
-        <i class="fa-solid fa-globe me-1"></i>All
-    </a>
-    <% const categories = ["Beach","Mountain","City","Countryside","Desert","Treehouse","Cabin","Luxury"]; %>
-    <% categories.forEach(cat => { %>
-        <a href="/Listings?query=<%= cat %>" class="btn btn-sm category-pill <%= (query === cat) ? 'active' : '' %>">
-            <% const icons = {Beach:"fa-umbrella-beach", Mountain:"fa-mountain", City:"fa-city", Countryside:"fa-wheat-awn", Desert:"fa-sun", Treehouse:"fa-tree", Cabin:"fa-house", Luxury:"fa-star"}; %>
-            <i class="fa-solid <%= icons[cat] || 'fa-tag' %> me-1"></i><%= cat %>
-        </a>
-    <% }); %>
-</div>
-
-<!-- Result Count -->
-<% if (query) { %>
-    <p class="result-count text-muted mb-3">
-        <strong><%= allListing.length %></strong> listing<%= allListing.length !== 1 ? 's' : '' %> found
-        for &ldquo;<%= query %>&rdquo;
-        <a href="/Listings" class="ms-2 text-decoration-none text-primary" style="font-size:0.85rem;">Clear</a>
-    </p>
-<% } else { %>
-    <p class="result-count text-muted mb-3">
-        Showing <strong><%= allListing.length %></strong> of <strong><%= total %></strong> listings
-    </p>
-<% } %>
-
-<!-- Listings Grid -->
-<% if (allListing.length === 0) { %>
-    <div class="empty-state text-center py-5">
-        <i class="fa-solid fa-house-circle-xmark fa-3x text-muted mb-3"></i>
-        <h5 class="text-muted">No listings found</h5>
-        <p class="text-secondary">Try a different search or <a href="/Listings">browse all listings</a>.</p>
     </div>
-<% } else { %>
-    <!-- Skeleton placeholders: shown until real grid renders -->
-    <div id="listing-skeleton" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-2">
-        <% for(let s = 0; s < 4; s++) { %>
-        <div class="col">
-            <div class="skeleton-card">
-                <div class="skeleton-img"></div>
-                <div class="p-2 pt-2">
-                    <div class="skeleton-line"></div>
-                    <div class="skeleton-line short"></div>
-                    <div class="skeleton-line xshort"></div>
+
+    <%- /* Category Filter Pills — horizontal scroll on mobile */ %>
+    <div class="category-scroll mb-3">
+        <div class="d-flex gap-2 px-2 px-md-0 justify-content-md-center flex-nowrap flex-md-wrap">
+            <a href="/Listings" class="btn btn-sm category-pill flex-shrink-0 <%= (!query) ? 'active' : '' %>">
+                <i class="fa-solid fa-globe me-1"></i>All
+            </a>
+            <% const categories = ["Beach","Mountain","City","Countryside","Desert","Treehouse","Cabin","Luxury"]; %>
+            <% const icons = {Beach:"fa-umbrella-beach", Mountain:"fa-mountain", City:"fa-city", Countryside:"fa-wheat-awn", Desert:"fa-sun", Treehouse:"fa-tree", Cabin:"fa-house", Luxury:"fa-star"}; %>
+            <% categories.forEach(cat => { %>
+                <a href="/Listings?query=<%= cat %>" class="btn btn-sm category-pill flex-shrink-0 <%= (query === cat) ? 'active' : '' %>">
+                    <i class="fa-solid <%= icons[cat] || 'fa-tag' %> me-1"></i><%= cat %>
+                </a>
+            <% }); %>
+        </div>
+    </div>
+
+    <%- /* Result Count */ %>
+    <% if (query) { %>
+        <p class="result-count text-muted mb-3 text-center px-2">
+            <strong><%= allListing.length %></strong> listing<%= allListing.length !== 1 ? 's' : '' %> found
+            for &ldquo;<%= query %>&rdquo;
+            <a href="/Listings" class="ms-2 text-decoration-none text-primary" style="font-size:0.85rem;">Clear</a>
+        </p>
+    <% } else { %>
+        <p class="result-count text-muted mb-3 text-center px-2">
+            Showing <strong><%= allListing.length %></strong> of <strong><%= total %></strong> listings
+        </p>
+    <% } %>
+
+    <%- /* Listings Grid */ %>
+    <% if (allListing.length === 0) { %>
+        <div class="text-center py-5 px-3">
+            <i class="fa-solid fa-house-circle-xmark fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">No listings found</h5>
+            <p class="text-secondary">Try a different search or <a href="/Listings">browse all listings</a>.</p>
+        </div>
+    <% } else { %>
+        <div id="listing-skeleton" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3 g-md-4 px-1">
+            <% for(let s = 0; s < 4; s++) { %>
+            <div class="col">
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="p-2 pt-2">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line xshort"></div>
+                    </div>
                 </div>
             </div>
+            <% } %>
         </div>
-        <% } %>
-    </div>
 
-    <div id="listing-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <% for(let listing of allListing) { %>
-            <div class="col">
-                <a href="/Listings/<%= listing.id %>" class="listing-links">
-                    <div class="card listing-card h-100 w-100">
-                        <img
-                            src="<%= listing.image.url %>"
-                            class="card-img-top"
-                            alt="<%= listing.title %>"
-                            loading="lazy"
-                        >
-                        <div class="card-img-overlay"></div>
-                        <div class="card-body px-1 pt-2 pb-1">
-                            <p class="fw-bold mb-0 card-listing-title"><%= listing.title %></p>
-                            <p class="text-muted small mb-1"><%= listing.location %>, <%= listing.country %></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold">₹<%= listing.price.toLocaleString("en-IN") %> <span class="text-muted fw-normal small">/ night</span></span>
-                                <% if (listing.avgRating) { %>
-                                    <span class="card-rating">
-                                        <i class="fa-solid fa-star" style="color:#F59E0B; font-size:0.75rem;"></i>
-                                        <span class="fw-semibold small"><%= listing.avgRating %></span>
-                                        <span class="text-muted small">· <%= listing.reviewCount %></span>
-                                    </span>
-                                <% } else { %>
-                                    <span class="badge bg-light text-muted border small fw-normal">New</span>
-                                <% } %>
+        <div id="listing-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3 g-md-4 px-1">
+            <% for(let listing of allListing) { %>
+                <div class="col">
+                    <a href="/Listings/<%= listing.id %>" class="listing-links">
+                        <div class="card listing-card h-100 w-100">
+                            <img
+                                src="<%= listing.image.url %>"
+                                class="card-img-top"
+                                alt="<%= listing.title %>"
+                                loading="lazy"
+                            >
+                            <div class="card-img-overlay"></div>
+                            <div class="card-body px-2 pt-2 pb-2">
+                                <p class="fw-bold mb-0 card-listing-title"><%= listing.title %></p>
+                                <p class="text-muted small mb-1"><%= listing.location %>, <%= listing.country %></p>
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
+                                    <span class="fw-semibold small">₹<%= listing.price.toLocaleString("en-IN") %> <span class="text-muted fw-normal">/ night</span></span>
+                                    <% if (listing.avgRating) { %>
+                                        <span class="card-rating">
+                                            <i class="fa-solid fa-star" style="color:#F59E0B; font-size:0.75rem;"></i>
+                                            <span class="fw-semibold small"><%= listing.avgRating %></span>
+                                            <span class="text-muted small">· <%= listing.reviewCount %></span>
+                                        </span>
+                                    <% } else { %>
+                                        <span class="badge bg-light text-muted border small fw-normal">New</span>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-        <% } %>
-    </div>
-
-    <script>
-        // Swap skeleton → real grid as soon as DOM is interactive
-        (function() {
-            var sk = document.getElementById('listing-skeleton');
-            var gr = document.getElementById('listing-grid');
-            if (sk) sk.style.display = 'none';
-            if (gr) gr.classList.add('loaded');
-        })();
-    </script>
-
-    <!-- Pagination -->
-    <% if (totalPages > 1) { %>
-        <nav class="mt-5 d-flex justify-content-center" aria-label="Listing pages">
-            <ul class="pagination">
-                <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
-                    <a class="page-link" href="/Listings?page=<%= page - 1 %>&limit=<%= limit %>&query=<%= query %>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
                     </a>
-                </li>
-                <% for(let i = 1; i <= totalPages; i++) { %>
-                    <li class="page-item <%= i === page ? 'active' : '' %>">
-                        <a class="page-link" href="/Listings?page=<%= i %>&limit=<%= limit %>&query=<%= query %>"><%= i %></a>
+                </div>
+            <% } %>
+        </div>
+
+        <script>
+            (function() {
+                var sk = document.getElementById('listing-skeleton');
+                var gr = document.getElementById('listing-grid');
+                if (sk) sk.style.display = 'none';
+                if (gr) gr.classList.add('loaded');
+            })();
+        </script>
+
+        <% if (totalPages > 1) { %>
+            <nav class="mt-5 d-flex justify-content-center px-2" aria-label="Listing pages">
+                <ul class="pagination flex-wrap justify-content-center">
+                    <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
+                        <a class="page-link" href="/Listings?page=<%= page - 1 %>&limit=<%= limit %>&query=<%= query %>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
                     </li>
-                <% } %>
-                <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
-                    <a class="page-link" href="/Listings?page=<%= page + 1 %>&limit=<%= limit %>&query=<%= query %>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    <% for(let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= i === page ? 'active' : '' %>">
+                            <a class="page-link" href="/Listings?page=<%= i %>&limit=<%= limit %>&query=<%= query %>"><%= i %></a>
+                        </li>
+                    <% } %>
+                    <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
+                        <a class="page-link" href="/Listings?page=<%= page + 1 %>&limit=<%= limit %>&query=<%= query %>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        <% } %>
     <% } %>
-<% } %>
+
+</div>
